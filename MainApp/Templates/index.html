@@ -7,9 +7,98 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
 <style>
-    .text-white{
+    /* .text-white{
         color: white;
+    } */
+    /* .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
+
+    .card-img-top {
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .book-title {
+        font-size: 16px;
+        font-weight: bold;
+        min-height: 48px;
+    }
+
+    .book-author {
+        font-size: 14px;
+        min-height: 36px;
+    } */
+    
+    body {
+        background-color: #121212;
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar {
+        background: linear-gradient(90deg, #00c853, #009624);
+    }
+
+    .card {
+        height: 100%;
+        background-color: #1e1e1e;
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    .card-img-top {
+        height: 300px;
+        object-fit: contain;
+        background-color: #111;
+        padding: 10px;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 12px;
+    }
+
+    .book-title {
+        font-size: 15px;
+        font-weight: 600;
+        min-height: 40px;
+        color: aliceblue;
+    }
+
+    .book-author {
+        font-size: 13px;
+        color: #bbb;
+        margin-bottom: 6px;
+    }
+
+    .book-meta {
+        font-size: 13px;
+        color: #ddd;
+    }
+
+    .container h1 {
+        margin-top: 30px;
+        font-weight: 700;
+    }
+
 </style>
 <body style="background-color: black;">
 
@@ -41,19 +130,72 @@
             </div>
 
             <!-- jinja template  -->
+             <!--
             {% for i in range(book_name|length) %}
                 <div class="col-md-3" style="margin-top:50px">
                     <div class="card">
                         <div class="card-body">
                             <img class="card-img-top" src="{{ image[i] }}">
-                            <h2>{{ book_name[i] }}</h2> <!-- he added a class here to make text white class="text-white"-->
-                            <h4>{{ author[i] }}</4>
+                            <h2>{{ book_name[i] }}</h2> --> <!-- he added a class here to make text white class="text-white"-->
+                            <!--
+                            <h4>{{ author[i] }}</h4>
                             <h4>Votes: {{ votes[i] }}</h4>
                             <h4>Rating: {{ rating[i]|round(1) }}</h4>
                         </div>
                     </div>
                 </div>
             {% endfor %}
+            -->
+            <!-- 
+            {% for i in range(book_name|length) %}
+            <div class="col-md-3 mt-4 d-flex">
+                <div class="card w-100">
+                    <img class="card-img-top" src="{{ image[i] }}">
+                    
+                    <div class="card-body">
+                        <div>
+                            <div class="book-title">{{ book_name[i] }}</div>
+                            <div class="book-author text-muted">{{ author[i] }}</div>
+                        </div>
+
+                        <div>
+                            <p>Votes: {{ votes[i] }}</p>
+                            <p>Rating: {{ rating[i]|round(1) }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            -->
+
+            {% for i in range(book_name|length) %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mt-4 d-flex">
+                <div class="card w-100">
+                    
+                    <img class="card-img-top" src="{{ image[i] }}">
+
+                    <div class="card-body">
+                        <div>
+                            <div class="book-title">
+                                {{ book_name[i] }}
+                            </div>
+
+                            <div class="book-author">
+                                {{ author[i] }}
+                            </div>
+                        </div>
+
+                        <div class="book-meta">
+                            ⭐ {{ rating[i]|round(1) }} <br>
+                            👥 {{ votes[i] }} votes
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+            
 
             
 
