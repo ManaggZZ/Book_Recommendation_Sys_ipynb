@@ -97,36 +97,38 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-white" style="font-size:50px">Recommended Books</h1>
-                <form action="/recommend_book" method="post">
+                <form action="/recommend_books" method="post">
                     <input name="user_input" type="text" class="form-control">
                     <input type="submit" class="btn btn-lg btn-warning">
                 </form>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6 mt-4 d-flex">
-                <div class="card w-100">
-                    
-                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/71f6DRbcrsL._AC_UY327_FMwebp_QL65_.jpg">
+            {% if data %}
+                {% for i in data %}
 
-                    <div class="card-body">
-                        <div>
-                            <div class="book-title">
-                                ABC
+                    <div class="col-lg-3 col-md-4 col-sm-6 mt-4 d-flex">
+                        <div class="card w-100">
+                        
+                            <img class="card-img-top" src={{i[2]}}>
+
+                            <div class="card-body">
+                                <div>
+                                    <div class="book-title">
+                                        {{i[0]}}
+                                    </div>
+
+                                    <div class="book-author">
+                                        {{i[1]}}
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="book-author">
-                                XYZ
-                            </div>
-                        </div>
-
-                        <div class="book-meta">
-                            ⭐ 1 <br>
-                            👥 1 votes
                         </div>
                     </div>
+                {% endfor %}
+            {% endif %}
 
-                </div>
-            </div>
+            
 
             
 

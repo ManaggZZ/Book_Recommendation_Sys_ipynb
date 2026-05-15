@@ -7,6 +7,8 @@ popular_df = pickle.load(open('..\Experimental_JupitorNotebook\popular.pkl', 'rb
 pt = pickle.load(open('..\Experimental_JupitorNotebook\pt.pkl', 'rb'))
 books = pickle.load(open('../Experimental_JupitorNotebook/books.pkl', 'rb'))
 similarity_score = pickle.load(open('..\Experimental_JupitorNotebook\similarity_scores.pkl', 'rb'))
+avg_rating_df = pickle.load(open('../Experimental_JupitorNotebook/avg_rating_df.pkl', 'rb'))
+num_rating_df = pickle.load(open('../Experimental_JupitorNotebook/num_rating_df.pkl', 'rb'))
 
 app = Flask(__name__)
 
@@ -28,7 +30,7 @@ def recommend_ui():
 def recommend():
     user_input = request.form.get('user_input')
     # Step 1: get index
-    index = np.where(pt.index == book_name)[0][0]
+    index = np.where(pt.index == user_input)[0][0]
     
     # Step 2: get similarity scores
     similarity_scores_list = list(enumerate(similarity_score[index]))
@@ -40,7 +42,7 @@ def recommend():
     similar_df['Book-Title'] = similar_df['Index'].apply(lambda x: pt.index[x])
     
     # Step 5: remove the same book
-    similar_df = similar_df[similar_df['Book-Title'] != book_name]
+    similar_df = similar_df[similar_df['Book-Title'] != user_input]
     
     # Step 6: apply similarity threshold
     # similar_df = similar_df[similar_df['Similarity'] > 0.2]
@@ -75,8 +77,8 @@ def recommend():
         
         data.append(item)
     
-    return data
-    return str(user_input)
+    print(data)
+    return render_template('recommend.html', data = data)
 
 if __name__ == '__main__':
     app.run(debug=True)
